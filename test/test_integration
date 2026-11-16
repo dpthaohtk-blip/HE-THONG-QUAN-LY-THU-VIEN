@@ -1,0 +1,18 @@
+import unittest
+
+class TestLibraryIntegration(unittest.TestCase):
+    def setUp(self):
+        # Chuẩn bị dữ liệu giả lập trước khi chạy test
+        self.sample_book = {"id": "B001", "title": "Co so du lieu", "author": "Nguyen Van A"}
+
+    def test_add_and_get_book_flow(self):
+        # TODO: Import BookService từ nhánh feature/add-book-service sau khi merge
+        # Giả lập luồng tích hợp: Thêm sách -> Lấy thông tin sách
+        library_db = []
+        library_db.append(self.sample_book)
+        
+        self.assertEqual(len(library_db), 1)
+        self.assertEqual(library_db[0]["title"], "Co so du lieu")
+
+if __name__ == "__main__":
+    unittest.main()
