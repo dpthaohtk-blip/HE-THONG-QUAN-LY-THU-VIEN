@@ -1,0 +1,53 @@
+import unittest
+
+# --- 1. Class gốc cần test ---
+class FineCalculator:
+    def calculate(self, days_overdue: int) -> float:
+        if days_overdue <= 0:
+            return 0.0
+        fine = days_overdue * 5000
+        if days_overdue > 10:
+            fine = fine * 1.2
+        return fine
+
+# --- 2. Class Unit Test sử dụng thư viện unittest ---
+class TestFineCalculator(unittest.TestCase):
+
+    def test_no_fine(self):
+        # 1. Arrange (Chuẩn bị dữ liệu)
+        calc = FineCalculator()
+        days = 0
+        expected = 0.0
+
+        # 2. Act (Thực thi hàm cần test)
+        actual = calc.calculate(days)
+
+        # 3. Assert (Kiểm tra kết quả)
+        self.assertEqual(expected, actual)
+
+    def test_normal_fine(self):
+        # 1. Arrange
+        calc = FineCalculator()
+        days = 5
+        expected = 25000.0  # 5 * 5000 = 25000
+
+        # 2. Act
+        actual = calc.calculate(days)
+
+        # 3. Assert
+        self.assertEqual(expected, actual)
+
+    def test_heavy_fine(self):
+        # 1. Arrange
+        calc = FineCalculator()
+        days = 11
+        expected = 66000.0  # (11 * 5000) * 1.2 = 66000
+
+        # 2. Act
+        actual = calc.calculate(days)
+
+        # 3. Assert
+        self.assertEqual(expected, actual)
+
+if __name__ == '__main__':
+    unittest.main()
